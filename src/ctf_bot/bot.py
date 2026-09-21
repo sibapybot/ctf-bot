@@ -17,7 +17,7 @@ class CTFBot(commands.Bot):
         print(f"Logged in as {self.user.name} ({self.user.id})")
 
 GUILD_ID = 1191346186880286770
-TARGET_THREAD_ID = 1551388337263091732  # 対象のフォーラム投稿ID
+TARGET_THREAD_ID = 1551500170758328340  # 対象のフォーラム投稿ID
 
 def main() -> None:
     intents = discord.Intents.default()
