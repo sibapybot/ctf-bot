@@ -16,7 +16,7 @@ class CTFBot(commands.Bot):
     async def on_ready(self):
         print(f"Logged in as {self.user.name} ({self.user.id})")
 
-GUILD_ID = 964656515686465608
+GUILD_ID = 1191346186880286770
 TARGET_THREAD_ID = 1551388337263091732  # 対象のフォーラム投稿ID
 
 def main() -> None:
