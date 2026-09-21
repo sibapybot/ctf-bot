@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UntitledProject</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+
+        background: #050505;
+        color: #d8d8d8;
+
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            "Noto Sans Mono",
+            monospace;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #terminal {
+        width: min(900px, 90vw);
+        min-height: 500px;
+
+        padding: 40px;
+
+        font-size: 17px;
+        line-height: 1.8;
+
+        white-space: pre-wrap;
+    }
+
+    .dim {
+        color: #777;
+    }
+
+    .important {
+        color: #fff;
+    }
+
+    .cursor {
+        display: inline-block;
+        width: 9px;
+        height: 1.1em;
+        background: #ddd;
+
+        vertical-align: text-bottom;
+
+        animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div id="terminal"></div>
+
+<script>
+const terminal = document.getElementById("terminal");
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function type(text, speed = 45, className = "") {
+    const span = document.createElement("span");
+
+    if (className) {
+        span.className = className;
+    }
+
+    terminal.appendChild(span);
+
+    for (const char of text) {
+        span.textContent += char;
+
+        await sleep(
+            speed + Math.random() * 30
+        );
+    }
+}
+
+async function line(text = "", delay = 250, className = "") {
+    const span = document.createElement("span");
+
+    if (className) {
+        span.className = className;
+    }
+
+    span.textContent = text + "\n";
+    terminal.appendChild(span);
+
+    await sleep(delay);
+}
+
+function getCurrentTime() {
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+
+    const hour = String(now.getHours()).padStart(2, "0");
+    const minute = String(now.getMinutes()).padStart(2, "0");
+    const second = String(now.getSeconds()).padStart(2, "0");
+
+    return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+}
+
+function getDiffDays() {
+    const oldDate = new Date("2023-11-24T00:00:00");
+    const now = new Date();
+
+    return Math.floor(
+        (now - oldDate) / (1000 * 60 * 60 * 24)
+    );
+}
+function getCurrentDate() {
+    const now = new Date();
+
+    return `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, "0")}/${String(now.getDate()).padStart(2, "0")}`;
+}
+
+async function boot() {
+
+    await sleep(1000);
+
+    await type("ハロー、UntitledProject。", 80, "important");
+
+    await sleep(1800);
+
+    await line("");
+    await line("");
+
+    await line("> おっと、時刻が大幅にずれているようです。", 500, "important");
+
+    await line("");
+    await sleep(1000);
+
+    await line("> 時刻の同期を開始します。", 500, "important");
+
+    await sleep(700);
+
+    await line("");
+
+    await line("[    0.000] Initializing time synchronization...", 450, "dim");
+    await line("[    0.412] Searching for time source...", 700, "dim");
+    await line("[    1.083] Time source found.", 500, "dim");
+
+    const diffDays = getDiffDays();
+
+    await line(
+        `[    1.294] 時刻のずれを検出: +${diffDays}日`,
+        700,
+        "dim"
+    );
+
+    await line("[    1.541] Synchronizing clock...", 800, "dim");
+
+    await line("");
+
+    await line(
+        `2023-11-24 00:00:00  ->  ${getCurrentTime()}`,
+        1200,
+        "important"
+    );
+
+    await line("");
+
+    await line("[    2.104] Clock synchronized.", 500, "dim");
+
+    await sleep(1800);
+
+    await line("");
+    await line("");
+
+    await type("ハロー、UniProject。", 100, "important");
+
+    await sleep(1800);
+
+    await line("");
+    await line("");
+
+    await line("[    2.841] Loading project metadata...", 500, "dim");
+    await line("[    3.102] Project created: 2023-11-24", 500, "dim");
+    await line("[    3.410] Original name: UntitledProject", 600, "dim");
+    await line("[    3.728] Current name:  UniProject", 700, "dim");
+
+    await line("");
+    await line("[    4.012] Applying changes...", 900, "dim");
+
+    await line("");
+
+    await line("UntitledProject → UniProject", 800, "important");
+
+    await line("");
+
+    await line("[    OK    ] Project restored.", 800, "dim");
+
+    await sleep(2000);
+
+    await line("");
+    await line("");
+
+    await type(`${getCurrentDate()} — UniProject`, 60, "important");
+
+    await sleep(2200);
+
+    await line("");
+    await line("");
+
+    await type("Congratulations!!!", 90, "important");
+
+    await line("");
+    await line("");
+
+    await type(
+        "当初は「UntitledProject」という仮称でした。",
+        60,
+        "important"
+    );
+
+    await line("");
+    await sleep(600);
+
+    await type(
+        "しかし、「名もなきもの」よりも、",
+        60,
+        "important"
+    );
+
+    await line("");
+
+    await type(
+        "「みんなで集まれる場所」という想いを大切にしたいと考え、",
+        60,
+        "important"
+    );
+
+    await line("");
+
+    await type(
+        "現在の「UniProject」に決定しました。",
+        60,
+        "important"
+    );
+    await sleep(500);
+
+    await line("");
+
+    await line(
+        "※ ネタバレ防止のため、このページのスクリーンショットやURLの共有はご遠慮ください。",
+        800,
+        "dim"
+    );
+
+    const cursor = document.createElement("span");
+    cursor.className = "cursor";
+
+    terminal.appendChild(cursor);
+}
+
+boot();
+</script>
+
+</body>
+</html>
