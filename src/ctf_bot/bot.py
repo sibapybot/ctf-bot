@@ -53,7 +53,7 @@ def main() -> None:
 
                 await message.author.send(
                     "その名前は、ここで呼ぶものではないようです。\n\n"
-                    "もう一度、ここで呼んでみてください。"）
+                    "もう一度、ここで呼んでみてください。"
                 )
 
         await bot.process_commands(message)
