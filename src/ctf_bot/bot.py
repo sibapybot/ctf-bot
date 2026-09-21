@@ -48,12 +48,12 @@ def main() -> None:
             and isinstance(message.channel, discord.Thread)
             and message.channel.id == TARGET_THREAD_ID
         ):
-            if message.content.strip().lower() == "untitledproject":
+            if "untitledproject" in message.content.casefold():
                 await message.delete()
 
                 await message.author.send(
                     "その名前は、ここで呼ぶものではないようです。\n\n"
-                    "もう一度、ここで呼んでみてください。"
+                    "もう一度、ここで呼んでみてください。"）
                 )
 
         await bot.process_commands(message)
