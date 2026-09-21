@@ -33,7 +33,7 @@ def main() -> None:
 
         # DM
         if message.guild is None:
-            if message.content.strip().lower() == "untitledproject":
+            if "untitledproject" in message.content.casefold():
                 await message.reply(
                     "ハロー、UntitledProject。\n\n"
                     "https://ctf.sibainu.site/"
