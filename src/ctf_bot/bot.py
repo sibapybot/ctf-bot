@@ -16,6 +16,8 @@ class CTFBot(commands.Bot):
     async def on_ready(self):
         print(f"Logged in as {self.user.name} ({self.user.id})")
 
+GUILD_ID = 964656515686465608
+TARGET_THREAD_ID = 1551388337263091732  # 対象のフォーラム投稿ID
 
 def main() -> None:
     intents = discord.Intents.default()
@@ -25,25 +27,30 @@ def main() -> None:
 
     @bot.event
     async def on_message(message):
+        # BOT自身の発言は無視
         if message.author.bot:
             return
 
+        # DM
         if message.guild is None:
             if message.content.strip().lower() == "untitledproject":
                 await message.reply(
                     "ハロー、UntitledProject。\n\n"
-                    "https://ctf.sibainu.site"
+                    "https://ctf.sibainu.site/"
                 )
             else:
                 await message.reply("...")
             return
 
+        # 指定したフォーラム投稿（Thread）のみ
         if (
-            message.guild.id == 964656515686465608
-            and message.channel.id == 1029349704879849482
+            message.guild.id == GUILD_ID
+            and isinstance(message.channel, discord.Thread)
+            and message.channel.id == TARGET_THREAD_ID
         ):
             if message.content.strip().lower() == "untitledproject":
                 await message.delete()
+
                 await message.author.send(
                     "その名前は、ここで呼ぶものではないようです。\n\n"
                     "もう一度、ここで呼んでみてください。"
