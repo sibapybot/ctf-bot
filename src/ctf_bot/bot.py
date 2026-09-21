@@ -32,7 +32,7 @@ def main() -> None:
             if message.content.strip().lower() == "untitledproject":
                 await message.reply(
                     "ハロー、UntitledProject。\n\n"
-                    "https://ctf.example.com/"
+                    "https://ctf.sibainu.site"
                 )
             else:
                 await message.reply("...")

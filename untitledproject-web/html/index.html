@@ -107,6 +107,8 @@ async function line(text = "", delay = 250, className = "") {
     span.textContent = text + "\n";
     terminal.appendChild(span);
 
+    scrollToBottom();
+
     await sleep(delay);
 }
 
@@ -137,6 +139,12 @@ function getCurrentDate() {
 
     return `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, "0")}/${String(now.getDate()).padStart(2, "0")}`;
 }
+function scrollToBottom() {
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
+}
 
 async function boot() {
 
@@ -155,7 +163,7 @@ async function boot() {
     await sleep(1000);
 
     await line("> 時刻の同期を開始します。", 500, "important");
-
+    
     await sleep(700);
 
     await line("");
@@ -227,11 +235,13 @@ async function boot() {
     await line("");
 
     await type("Congratulations!!!", 90, "important");
+    await line("");
+    await type("クリアおめでとうございます!!", 90, "important");
 
     await line("");
     await line("");
 
-    await type(
+    await line(
         "当初は「UntitledProject」という仮称でした。",
         60,
         "important"
@@ -240,7 +250,7 @@ async function boot() {
     await line("");
     await sleep(600);
 
-    await type(
+    await line(
         "しかし、「名もなきもの」よりも、",
         60,
         "important"
@@ -248,7 +258,7 @@ async function boot() {
 
     await line("");
 
-    await type(
+    await line(
         "「みんなで集まれる場所」という想いを大切にしたいと考え、",
         60,
         "important"
@@ -256,7 +266,7 @@ async function boot() {
 
     await line("");
 
-    await type(
+    await line(
         "現在の「UniProject」に決定しました。",
         60,
         "important"
